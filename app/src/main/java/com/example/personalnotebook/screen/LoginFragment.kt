@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.personalnotebook.R
 import com.example.personalnotebook.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -35,6 +36,7 @@ class LoginFragment : Fragment() {
         if (currentUser != null) updateUI(currentUser)
 
         with(binding) {
+
             btnLogin.setOnClickListener {
                 val email = edLogin.text.toString()
                 val password = edPassword.text.toString()
@@ -50,6 +52,10 @@ class LoginFragment : Fragment() {
                             }
                         }
                 }
+            }
+
+            btnRegistration.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
             }
         }
 
