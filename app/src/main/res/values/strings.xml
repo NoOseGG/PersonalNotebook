@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PersonalNotebook</string>
+    <string name="fragment_login_title_app">Personal Notebook</string>
 </resources>

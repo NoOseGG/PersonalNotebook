@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Personal Notebook"/>
+        android:text="@string/fragment_login_title_app"/>
 
     <EditText
         android:id="@+id/edLogin"
