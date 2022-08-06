@@ -3,4 +3,8 @@
     <string name="fragment_login_title_app">Personal Notebook</string>
 
     <string name="fragment_login_sign_in">SingIn: %1$s</string>
+    <string name="password_dont_equals">Пароли не совпадают</string>
+    <string name="password_so_short">Пароль слишком короткий</string>
+    <string name="registred">Вы зарегистрировались</string>
+    <string name="not_registred">Вы не смогли зарегистрироваться</string>
 </resources>

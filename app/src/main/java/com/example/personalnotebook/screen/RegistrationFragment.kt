@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.personalnotebook.R
 import com.example.personalnotebook.databinding.FragmentRegistrationBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -42,6 +43,10 @@ class RegistrationFragment : Fragment() {
                     createNewUserInFirebase(login, firstPassword)
                 }
             }
+
+            btnBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
         }
     }
 
@@ -55,10 +60,10 @@ class RegistrationFragment : Fragment() {
         mAuth.createUserWithEmailAndPassword(login, password)
             .addOnCompleteListener { task ->
                 if(task.isSuccessful) {
-                    showToast("Вы зарегистрировались")
+                    showToast(getString(R.string.registred))
                     findNavController().popBackStack()
                 } else {
-                    showToast("Вы не смогли зарегистрироваться")
+                    showToast(getString(R.string.not_registred))
 
                 }
             }
@@ -68,13 +73,13 @@ class RegistrationFragment : Fragment() {
         if(firstPassword.equals(secondPassword)) {
             return true
         }
-        showToast("Пароли не совпадают")
+        showToast(getString(R.string.password_dont_equals))
         return false
     }
 
     private fun checkCorrectPassword(password: String): Boolean {
         if(password.length < 6) {
-            showToast("Пароль слишком короткий")
+            showToast(getString(R.string.password_so_short))
             return false
         }
         return true

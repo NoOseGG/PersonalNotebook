@@ -45,7 +45,7 @@ class LoginFragment : Fragment() {
                     mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if(task.isSuccessful) {
-                                user.text = getString(R.string.fragment_login_sign_in, task.result.user?.email)
+                                user.text = getString(R.string.fragment_login_sign_in, task.result.user?.displayName)
                                 println("SUCCESS")
                             } else {
                                 println("FAILURE")
@@ -59,7 +59,7 @@ class LoginFragment : Fragment() {
             }
         }
 
-        binding.btnLogout.setOnClickListener {
+        binding.imgAvatar.setOnClickListener {
             println(mAuth.currentUser?.email)
             mAuth.signOut()
             println(mAuth.currentUser?.email)
