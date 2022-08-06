@@ -1,9 +1,9 @@
 package com.example.personalnotebook.screen
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.personalnotebook.R
@@ -45,7 +45,8 @@ class LoginFragment : Fragment() {
                     mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if(task.isSuccessful) {
-                                user.text = getString(R.string.fragment_login_sign_in, task.result.user?.displayName)
+                                user.text = getString(R.string.fragment_login_sign_in, task.result.user?.email)
+                                imgAvatar.visibility = View.VISIBLE
                                 println("SUCCESS")
                             } else {
                                 println("FAILURE")
@@ -59,12 +60,16 @@ class LoginFragment : Fragment() {
             }
         }
 
-        binding.imgAvatar.setOnClickListener {
+       /* binding.imgAvatar.setOnClickListener {
             println(mAuth.currentUser?.email)
             mAuth.signOut()
+            binding.imgAvatar.visibility = View.INVISIBLE
             println(mAuth.currentUser?.email)
             binding.user.text = ""
-        }
+        }*/
+
+
+
     }
 
     override fun onDestroyView() {
@@ -74,5 +79,25 @@ class LoginFragment : Fragment() {
 
     private fun updateUI(user: FirebaseUser) {
         binding.user.text = user.email
+        binding.imgAvatar.visibility = View.VISIBLE
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.img_avatar -> {
+                val v =  binding.imgAvatar as View
+                val pm = PopupMenu(requireContext(), v)
+
+                pm.menuInflater.inflate(R.menu.user_menu, pm.menu)
+                pm.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                    when(item.itemId) {
+                        R.id.info_user -> Toast.makeText(requireContext(), "Info User", Toast.LENGTH_SHORT).show()
+                    }
+                    true
+                })
+                pm.show()
+            }
+        }
+        return false
     }
 }
