@@ -10,23 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.personalnotebook.R
 import com.example.personalnotebook.databinding.FragmentRegistrationBinding
 import com.google.firebase.auth.FirebaseAuth
+import javax.inject.Inject
 
-class RegistrationFragment : Fragment() {
-
-    private val mAuth by lazy { FirebaseAuth.getInstance() }
-
-    private var _binding: FragmentRegistrationBinding? = null
-    private val binding get() = requireNotNull(_binding)
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return FragmentRegistrationBinding.inflate(inflater, container, false)
-            .also { _binding = it }
-            .root
-    }
+class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentRegistrationBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,11 +34,6 @@ class RegistrationFragment : Fragment() {
                 findNavController().popBackStack()
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun createNewUserInFirebase(login: String, password: String) {

@@ -10,24 +10,11 @@ import com.example.personalnotebook.R
 import com.example.personalnotebook.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class LoginFragment : Fragment() {
-
-    private var _binding: FragmentLoginBinding? = null
-    private val binding get() = requireNotNull(_binding)
-    private val mAuth by lazy { FirebaseAuth.getInstance() }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return FragmentLoginBinding.inflate(inflater, container, false)
-            .also { _binding = it }
-            .root
-    }
-
-
+@AndroidEntryPoint
+class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,6 +34,7 @@ class LoginFragment : Fragment() {
                             if(task.isSuccessful) {
                                 user.text = getString(R.string.fragment_login_sign_in, task.result.user?.email)
                                 imgAvatar.visibility = View.VISIBLE
+                                findNavController().navigate(R.id.action_loginFragment_to_notesFragment)
                                 println("SUCCESS")
                             } else {
                                 println("FAILURE")
@@ -67,19 +55,12 @@ class LoginFragment : Fragment() {
             println(mAuth.currentUser?.email)
             binding.user.text = ""
         }*/
-
-
-
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun updateUI(user: FirebaseUser) {
         binding.user.text = user.email
         binding.imgAvatar.visibility = View.VISIBLE
+        findNavController().navigate(R.id.action_loginFragment_to_notesFragment)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

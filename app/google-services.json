@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "12670308834",
+    "project_id": "personalnotebook-c5c24",
+    "storage_bucket": "personalnotebook-c5c24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12670308834:android:85cbaed29c06d241ac29bb",
+        "android_client_info": {
+          "package_name": "com.example.personalnotebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12670308834-0riosm2t9di7309kohtire15566lo4dp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6RPBIbI0sQHllF4NapP7MnEusEInFGjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12670308834-0riosm2t9di7309kohtire15566lo4dp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

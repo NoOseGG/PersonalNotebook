@@ -1,33 +1,26 @@
 package com.example.personalnotebook.screen.notes
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.personalnotebook.R
 import com.example.personalnotebook.databinding.FragmentNotesBinding
+import com.example.personalnotebook.screen.BaseFragment
+import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
-class NotesFragment : Fragment() {
-
-    private var _binding: FragmentNotesBinding? = null
-    private val binding get() = requireNotNull(_binding)
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return FragmentNotesBinding.inflate(inflater, container, false)
-            .also { _binding = it }
-            .root
-    }
+@AndroidEntryPoint
+class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.tvUser.text = mAuth.currentUser?.email
+
+        binding.imgAvatar.setOnClickListener {
+            mAuth.signOut()
+            findNavController().navigate(R.id.action_global_loginFragment)
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
