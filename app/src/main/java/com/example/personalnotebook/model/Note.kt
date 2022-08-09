@@ -1,6 +1,8 @@
 package com.example.personalnotebook.model
 
+import java.io.Serializable
+
 data class Note(
-    val id: Int,
-    val title: String
-)
+    var id: String? = "",
+    var title: String? = ""
+) : Serializable

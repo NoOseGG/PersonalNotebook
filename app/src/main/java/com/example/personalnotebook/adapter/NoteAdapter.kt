@@ -28,7 +28,7 @@ class NoteAdapter : ListAdapter<Note, NoteViewHolder>(DIFF_UTIL) {
     companion object {
         private val DIFF_UTIL = object : DiffUtil.ItemCallback<Note>() {
             override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem == newItem
             }
 
             override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {

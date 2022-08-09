@@ -4,7 +4,7 @@ import com.example.personalnotebook.model.Note
 
 interface NoteRepository {
 
-    suspend fun getNotes(UserID: String): Result<List<Note>>
+    suspend fun getNotes(userName: String): Result<List<Note>>
 
-    suspend fun insertNote(note: Note)
+    suspend fun insertNote(note: Note, userName: String)
 }

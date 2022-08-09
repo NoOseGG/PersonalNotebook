@@ -10,8 +10,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.personalnotebook.R
 import com.example.personalnotebook.databinding.FragmentRegistrationBinding
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentRegistrationBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
