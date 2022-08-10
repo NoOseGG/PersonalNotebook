@@ -2,11 +2,13 @@ package com.example.personalnotebook.screen.notes
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Adapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.personalnotebook.R
 import com.example.personalnotebook.adapter.NoteAdapter
+import com.example.personalnotebook.adapter.NoteViewHolder
 import com.example.personalnotebook.databinding.FragmentNotesBinding
 import com.example.personalnotebook.model.Note
 import com.example.personalnotebook.screen.BaseFragment
@@ -21,8 +23,12 @@ import javax.inject.Inject
 class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::inflate) {
 
     private val list = mutableListOf<Note?>()
-    private val adapter by lazy { NoteAdapter() }
-
+    private val adapter = NoteAdapter { note, button ->
+        when(button) {
+            NoteViewHolder.BUTTON_DELETE -> { deleteNote(note) }
+            NoteViewHolder.BUTTON_ROOT -> {  }
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -62,6 +68,18 @@ class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::i
 
         })
 
+    }
+
+    private fun deleteNote(note: Note) {
+        list.remove(note)
+        database.getReference("hoc751").child(note.id!!)
+            .removeValue()
+        updateUi()
+    }
+
+    private fun updateUi() {
+        adapter.submitList(list)
+        binding.recyclerView.adapter = adapter
     }
 
 }

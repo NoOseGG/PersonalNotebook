@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.personalnotebook.databinding.NoteItemBinding
 import com.example.personalnotebook.model.Note
 
-class NoteAdapter : ListAdapter<Note, NoteViewHolder>(DIFF_UTIL) {
+class NoteAdapter(
+    private val onClick: (Note, Int) -> Unit
+) : ListAdapter<Note, NoteViewHolder>(DIFF_UTIL) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
@@ -17,7 +19,8 @@ class NoteAdapter : ListAdapter<Note, NoteViewHolder>(DIFF_UTIL) {
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            onClick = onClick
         )
     }
 
@@ -40,10 +43,22 @@ class NoteAdapter : ListAdapter<Note, NoteViewHolder>(DIFF_UTIL) {
 }
 
 class NoteViewHolder(
-    private val binding: NoteItemBinding
+    private val binding: NoteItemBinding,
+    private val onClick: (Note, Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Note) {
         binding.tvTitle.text = item.title
+        binding.imgDelete.setOnClickListener {
+            onClick(item, BUTTON_DELETE)
+        }
+        binding.root.setOnClickListener {
+            onClick(item, BUTTON_ROOT)
+        }
+    }
+
+    companion object {
+        const val BUTTON_ROOT = 0
+        const val BUTTON_DELETE = 1
     }
 }

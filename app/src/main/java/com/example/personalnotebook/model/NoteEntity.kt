@@ -2,8 +2,7 @@ package com.example.personalnotebook.model
 
 import java.io.Serializable
 
-data class Note(
+data class NoteEntity(
     var id: String? = "",
-    var title: String? = "",
-    var description: String? = ""
+    var title: String? = ""
 ) : Serializable
