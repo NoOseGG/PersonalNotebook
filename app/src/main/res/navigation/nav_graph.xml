@@ -17,11 +17,13 @@
             android:id="@+id/action_loginFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.personalnotebook.screen.RegistrationFragment"
         android:label="RegistrationFragment"
         tools:layout="@layout/fragment_registration"/>
+
     <fragment
         android:id="@+id/notesFragment"
         android:name="com.example.personalnotebook.screen.notes.NotesFragment"
@@ -30,10 +32,11 @@
         <action
             android:id="@+id/action_notesFragment_to_addNoteFragment"
             app:destination="@id/addNoteFragment" />
+        <action
+            android:id="@+id/action_notesFragment_to_infoNoteFragment"
+            app:destination="@id/infoNoteFragment" />
     </fragment>
-    <action
-        android:id="@+id/action_global_loginFragment"
-        app:popUpTo="@id/loginFragment" />
+
     <fragment
         android:id="@+id/addNoteFragment"
         android:name="com.example.personalnotebook.screen.addnote.AddNoteFragment"
@@ -43,4 +46,20 @@
             android:id="@+id/action_addNoteFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/infoNoteFragment"
+        android:name="com.example.personalnotebook.screen.editnote.InfoNoteFragment"
+        android:label="InfoNoteFragment"
+        tools:layout="@layout/fragment_info_note">
+        <argument
+            android:name="noteId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:popUpTo="@id/loginFragment" />
+
 </navigation>

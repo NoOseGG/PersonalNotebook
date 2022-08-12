@@ -20,6 +20,7 @@ import com.example.personalnotebook.databinding.FragmentNotesBinding
 import com.example.personalnotebook.databinding.LayoutDeleteDialogBinding
 import com.example.personalnotebook.model.Note
 import com.example.personalnotebook.screen.BaseFragment
+import com.example.personalnotebook.screen.editnote.InfoNoteFragmentDirections
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -34,7 +35,12 @@ class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::i
     private val adapter = NoteAdapter { note, button ->
         when(button) {
             NoteViewHolder.BUTTON_DELETE -> { showDeleteDialog(note) }
-            NoteViewHolder.BUTTON_ROOT -> {  }
+            NoteViewHolder.BUTTON_ROOT -> {
+                val action = NotesFragmentDirections.actionNotesFragmentToInfoNoteFragment(
+                    note.id
+                )
+                findNavController().navigate(action)
+            }
         }
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
