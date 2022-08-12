@@ -1,8 +1,15 @@
 package com.example.personalnotebook.screen.notes
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Adapter
+import android.widget.Button
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +17,7 @@ import com.example.personalnotebook.R
 import com.example.personalnotebook.adapter.NoteAdapter
 import com.example.personalnotebook.adapter.NoteViewHolder
 import com.example.personalnotebook.databinding.FragmentNotesBinding
+import com.example.personalnotebook.databinding.LayoutDeleteDialogBinding
 import com.example.personalnotebook.model.Note
 import com.example.personalnotebook.screen.BaseFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -25,7 +33,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::i
     private val list = mutableListOf<Note?>()
     private val adapter = NoteAdapter { note, button ->
         when(button) {
-            NoteViewHolder.BUTTON_DELETE -> { deleteNote(note) }
+            NoteViewHolder.BUTTON_DELETE -> { showDeleteDialog(note) }
             NoteViewHolder.BUTTON_ROOT -> {  }
         }
     }
@@ -72,7 +80,8 @@ class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::i
 
     private fun deleteNote(note: Note) {
         list.remove(note)
-        database.getReference("hoc751").child(note.id!!)
+        val path = mAuth.currentUser?.email?.substringBefore("@").toString()
+        database.getReference(path).child(note.id!!)
             .removeValue()
         updateUi()
     }
@@ -82,4 +91,20 @@ class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::i
         binding.recyclerView.adapter = adapter
     }
 
+    private fun showDeleteDialog(note: Note) {
+        val dialog = Dialog(requireContext(), R.style.AlertDialogTheme)
+        dialog.setContentView(R.layout.layout_delete_dialog)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+
+        dialog.findViewById<Button>(R.id.btn_no).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.findViewById<Button>(R.id.btn_yes).setOnClickListener {
+            deleteNote(note)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
 }

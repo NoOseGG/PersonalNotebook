@@ -9,5 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="button_background">#FFEB3B</color>
     <color name="custom_edit_text_color">#FFEB3B</color>
+    <color name="dialog_delete_color">#FFEB3B</color>
     <color name="dark_grey">#706F6E</color>
+
+    <color name="gradient_start_color">#00BCD4</color>
+    <color name="gradient_end_color">#054750</color>
 </resources>
