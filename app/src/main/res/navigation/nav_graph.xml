@@ -53,8 +53,8 @@
         android:label="InfoNoteFragment"
         tools:layout="@layout/fragment_info_note">
         <argument
-            android:name="noteId"
-            app:argType="string"
+            android:name="note"
+            app:argType="com.example.personalnotebook.model.Note"
             app:nullable="true" />
     </fragment>
 

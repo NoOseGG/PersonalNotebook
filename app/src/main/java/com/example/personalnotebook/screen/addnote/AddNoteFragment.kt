@@ -27,6 +27,11 @@ class AddNoteFragment : BaseFragment<FragmentAddNoteBinding>(FragmentAddNoteBind
 
         binding.tvUser.text = mAuth.currentUser?.email
 
+        binding.imgAvatar.setOnClickListener {
+            mAuth.signOut()
+            findNavController().navigate(R.id.action_global_loginFragment)
+        }
+
         with(binding) {
             btnBack.setOnClickListener {
                 findNavController().popBackStack()

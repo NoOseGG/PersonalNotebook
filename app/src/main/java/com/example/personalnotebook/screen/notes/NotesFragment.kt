@@ -37,7 +37,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::i
             NoteViewHolder.BUTTON_DELETE -> { showDeleteDialog(note) }
             NoteViewHolder.BUTTON_ROOT -> {
                 val action = NotesFragmentDirections.actionNotesFragmentToInfoNoteFragment(
-                    note.id
+                    note = note
                 )
                 findNavController().navigate(action)
             }
