@@ -1,65 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/nav_graph_notes">
 
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.personalnotebook.screen.LoginFragment"
-        android:label="LoginFragment"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_registrationFragment"
-            app:destination="@id/registrationFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_notesFragment"
-            app:destination="@id/notesFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/registrationFragment"
-        android:name="com.example.personalnotebook.screen.RegistrationFragment"
-        android:label="RegistrationFragment"
-        tools:layout="@layout/fragment_registration"/>
-
-    <fragment
-        android:id="@+id/notesFragment"
-        android:name="com.example.personalnotebook.screen.notes.NotesFragment"
-        android:label="NotesFragment"
-        tools:layout="@layout/fragment_notes">
-        <action
-            android:id="@+id/action_notesFragment_to_addNoteFragment"
-            app:destination="@id/addNoteFragment" />
-        <action
-            android:id="@+id/action_notesFragment_to_infoNoteFragment"
-            app:destination="@id/infoNoteFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/addNoteFragment"
-        android:name="com.example.personalnotebook.screen.addnote.AddNoteFragment"
-        android:label="AddNoteFragment"
-        tools:layout="@layout/fragment_add_note">
-        <action
-            android:id="@+id/action_addNoteFragment_to_notesFragment"
-            app:destination="@id/notesFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/infoNoteFragment"
-        android:name="com.example.personalnotebook.screen.editnote.InfoNoteFragment"
-        android:label="InfoNoteFragment"
-        tools:layout="@layout/fragment_info_note">
-        <argument
-            android:name="note"
-            app:argType="com.example.personalnotebook.model.Note"
-            app:nullable="true" />
-    </fragment>
-
-    <action
-        android:id="@+id/action_global_loginFragment"
-        app:popUpTo="@id/loginFragment" />
+    <include app:graph="@navigation/nav_graph_settings"/>
+    <include app:graph="@navigation/nav_graph_notes"/>
 
 </navigation>
