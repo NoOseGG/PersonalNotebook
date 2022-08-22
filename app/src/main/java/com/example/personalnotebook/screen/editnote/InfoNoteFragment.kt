@@ -23,5 +23,14 @@ class InfoNoteFragment : BaseFragment<FragmentInfoNoteBinding>(FragmentInfoNoteB
             mAuth.signOut()
             findNavController().navigate(R.id.action_global_loginFragment)
         }
+
+        with(binding) {
+            edTitle.setText(args.note?.title)
+            edDescription.setText(args.note?.description)
+
+            btnBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
     }
 }
