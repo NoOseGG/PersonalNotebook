@@ -45,6 +45,11 @@
         <action
             android:id="@+id/action_addNoteFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
+        <argument
+            android:name="note"
+            app:argType="com.example.personalnotebook.model.Note"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
     <fragment
@@ -56,6 +61,9 @@
             android:name="note"
             app:argType="com.example.personalnotebook.model.Note"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_infoNoteFragment_to_addNoteFragment"
+            app:destination="@id/addNoteFragment" />
     </fragment>
 
     <action

@@ -25,11 +25,16 @@ class InfoNoteFragment : BaseFragment<FragmentInfoNoteBinding>(FragmentInfoNoteB
         }
 
         with(binding) {
-            edTitle.setText(args.note?.title)
-            edDescription.setText(args.note?.description)
+            tvTextTitle.text = args.note?.title
+            tvTextDescription.text = args.note?.description
 
             btnBack.setOnClickListener {
                 findNavController().popBackStack()
+            }
+
+            btnEdit.setOnClickListener {
+                val action = InfoNoteFragmentDirections.actionInfoNoteFragmentToAddNoteFragment(args.note)
+                findNavController().navigate(action)
             }
         }
     }
