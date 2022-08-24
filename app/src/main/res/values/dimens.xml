@@ -2,6 +2,14 @@
 <resources>
     <dimen name="btn_add_note_width">50dp</dimen>
     <dimen name="btn_add_note_height">60dp</dimen>
+
     <dimen name="heading_text_size">28sp</dimen>
     <dimen name="content_text_size">24sp</dimen>
+
+    <!--item note size text-->
+    <dimen name="item_note_title_text_size">20sp</dimen>
+    <dimen name="item_note_content_text_size">16sp</dimen>
+    <dimen name="item_note_date_text_size">12sp</dimen>
+
+
 </resources>

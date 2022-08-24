@@ -24,16 +24,25 @@
             android:layout_marginTop="16dp"
             android:textColor="@color/black"
             tools:text="Магазин евроопт"
-            android:textSize="18dp"/>
+            android:textSize="@dimen/item_note_title_text_size"/>
 
         <TextView
             android:id="@+id/tv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
             tools:text="Помидоры - 1кг"
-            android:textSize="14dp"/>
+            android:textSize="@dimen/item_note_content_text_size"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:textSize="@dimen/item_note_date_text_size"
+            android:layout_marginBottom="16dp"
+            tools:text="11 August"/>
 
     </LinearLayout>
 

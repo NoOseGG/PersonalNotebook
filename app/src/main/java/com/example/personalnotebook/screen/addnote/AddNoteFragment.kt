@@ -17,6 +17,8 @@ import com.example.personalnotebook.screen.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -45,7 +47,11 @@ class AddNoteFragment : BaseFragment<FragmentAddNoteBinding>(FragmentAddNoteBind
             btnApply.setOnClickListener {
                 val title = edTitle.text.toString()
                 val description = edDescription.text.toString()
-                val note = Note(title = title, description = description)
+                val sdf = SimpleDateFormat("MMMM dd")
+                val currentDate = sdf.format(Date())
+                println(currentDate)
+
+                val note = Note(title = title, description = description, date = currentDate.toString())
 
                 viewModel.sendAddNote(note)
                 findNavController().navigate(R.id.action_addNoteFragment_to_notesFragment)

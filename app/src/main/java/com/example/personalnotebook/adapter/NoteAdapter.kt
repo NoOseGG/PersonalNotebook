@@ -50,6 +50,7 @@ class NoteViewHolder(
     fun bind(item: Note) {
         binding.tvTitle.text = item.title
         binding.tvDescription.text = item.description
+        binding.tvDate.text = item.date
         binding.root.setOnLongClickListener {
             onClick(item, BUTTON_DELETE)
             true
