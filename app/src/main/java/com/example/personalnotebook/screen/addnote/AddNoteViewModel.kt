@@ -21,9 +21,9 @@ class AddNoteViewModel @Inject constructor(
 
     val resultFlow = sendNoteFlow.onEach {
 
-    }.mapLatest {
-        val result = noteRepository.insertNote(it)
-        result
+    }.mapLatest { note ->
+        noteRepository.insertNote(note)
+        note
     }.shareIn(
         viewModelScope,
         SharingStarted.Eagerly,

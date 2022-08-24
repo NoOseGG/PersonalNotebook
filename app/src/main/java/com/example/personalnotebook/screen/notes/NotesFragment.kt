@@ -10,6 +10,8 @@ import android.widget.Adapter
 import android.widget.Button
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,12 +29,14 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::inflate) {
 
-    private val list = mutableListOf<Note?>()
+    private val viewModel: NotesViewModel by viewModels()
     private val adapter = NoteAdapter { note, button ->
         when(button) {
             NoteViewHolder.BUTTON_DELETE -> { showDeleteDialog(note) }
@@ -47,59 +51,30 @@ class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::i
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvUser.text = mAuth.currentUser?.email
-
-        loadData()
-
         with(binding) {
+            tvUser.text = mAuth.currentUser?.email
             recyclerView.smoothScrollToPosition(0)
             recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             recyclerView.setHasFixedSize(false)
             recyclerView.adapter = adapter
 
-        }
-
-        binding.imgAvatar.setOnClickListener {
-            mAuth.signOut()
-            findNavController().navigate(R.id.action_global_loginFragment)
-        }
-
-        binding.btnAddNote.setOnClickListener {
-            findNavController().navigate(R.id.action_notesFragment_to_addNoteFragment)
-        }
-    }
-
-    private fun loadData() {
-        val name = mAuth.currentUser?.email.toString().substringBefore("@")
-        val myRef = database.getReference(name)
-
-        myRef.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(list.size > 0) list.clear()
-                for(ss in snapshot.children) {
-                    list.add(ss.getValue(Note::class.java))
-                }
-
-                adapter.submitList(list)
+            imgAvatar.setOnClickListener {
+                mAuth.signOut()
+                findNavController().navigate(R.id.action_global_loginFragment)
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+            btnAddNote.setOnClickListener {
+                findNavController().navigate(R.id.action_notesFragment_to_addNoteFragment)
             }
+        }
 
-        })
+        viewModel.listFlow.onEach { list ->
+            updateUi(list)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
     }
 
-    private fun deleteNote(note: Note) {
-        list.remove(note)
-        val path = mAuth.currentUser?.email?.substringBefore("@").toString()
-        database.getReference(path).child(note.id!!)
-            .removeValue()
-        updateUi()
-    }
-
-    private fun updateUi() {
+    private fun updateUi(list: List<Note?>) {
         adapter.submitList(list)
         binding.recyclerView.adapter = adapter
     }
@@ -114,7 +89,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::i
         }
 
         dialog.findViewById<Button>(R.id.btn_yes).setOnClickListener {
-            deleteNote(note)
+            viewModel.deleteNote(note)
             dialog.dismiss()
         }
 

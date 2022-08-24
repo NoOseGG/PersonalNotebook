@@ -27,6 +27,8 @@ class AddNoteFragment : BaseFragment<FragmentAddNoteBinding>(FragmentAddNoteBind
     @Inject lateinit var noteRepository: NoteRepositoryImpl
     private val viewModel: AddNoteViewModel by viewModels()
     private val args: AddNoteFragmentArgs by navArgs()
+    //use for add note or update note
+    private var iUpdate = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,7 +55,11 @@ class AddNoteFragment : BaseFragment<FragmentAddNoteBinding>(FragmentAddNoteBind
 
                 val note = Note(title = title, description = description, date = currentDate.toString())
 
-                viewModel.sendAddNote(note)
+                if(iUpdate)
+
+                else
+                    viewModel.sendAddNote(note)
+
                 findNavController().navigate(R.id.action_addNoteFragment_to_notesFragment)
             }
         }
@@ -63,6 +69,7 @@ class AddNoteFragment : BaseFragment<FragmentAddNoteBinding>(FragmentAddNoteBind
         if(note != null) {
             binding.edTitle.setText(note.title)
             binding.edDescription.setText(note.description)
+            iUpdate = true
         }
     }
 }

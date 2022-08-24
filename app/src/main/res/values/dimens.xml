@@ -10,6 +10,16 @@
     <dimen name="item_note_title_text_size">20sp</dimen>
     <dimen name="item_note_content_text_size">16sp</dimen>
     <dimen name="item_note_date_text_size">12sp</dimen>
+    <dimen name="item_note_margin_start">16dp</dimen>
+    <dimen name="item_note_tv_date_margin_bottom">16dp</dimen>
+    <dimen name="item_note_tv_date_margin_top">12dp</dimen>
+    <dimen name="item_note_tv_title_margin_top">16dp</dimen>
+    <dimen name="item_note_min_height_card_view">70dp</dimen>
+    <dimen name="item_note_max_height_card_view">150dp</dimen>
+    <dimen name="item_note_content_padding_card_view">8dp</dimen>
+    <dimen name="item_note_margin_horizontal_card_view">8dp</dimen>
+    <dimen name="item_note_margin_vertical_card_view">4dp</dimen>
+    <dimen name="item_note_corner_radius_card_view">50dp</dimen>
 
 
 </resources>

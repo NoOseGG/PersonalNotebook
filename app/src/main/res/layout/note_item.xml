@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:minHeight="70dp"
-    android:maxHeight="150dp"
-    app:contentPadding="8dp"
-    android:layout_marginHorizontal="8dp"
-    android:layout_marginVertical="4dp"
-    app:cardCornerRadius="50dp">
+    android:minHeight="@dimen/item_note_min_height_card_view"
+    android:maxHeight="@dimen/item_note_max_height_card_view"
+    app:contentPadding="@dimen/item_note_content_padding_card_view"
+    android:layout_marginHorizontal="@dimen/item_note_margin_horizontal_card_view"
+    android:layout_marginVertical="@dimen/item_note_margin_vertical_card_view"
+    app:cardCornerRadius="@dimen/item_note_corner_radius_card_view">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,8 +20,8 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="@dimen/item_note_margin_start"
+            android:layout_marginTop="@dimen/item_note_tv_title_margin_top"
             android:textColor="@color/black"
             tools:text="Магазин евроопт"
             android:textSize="@dimen/item_note_title_text_size"/>
@@ -30,7 +30,7 @@
             android:id="@+id/tv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/item_note_margin_start"
             tools:text="Помидоры - 1кг"
             android:textSize="@dimen/item_note_content_text_size"/>
 
@@ -38,10 +38,10 @@
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="@dimen/item_note_margin_start"
+            android:layout_marginTop="@dimen/item_note_tv_date_margin_top"
             android:textSize="@dimen/item_note_date_text_size"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/item_note_tv_date_margin_bottom"
             tools:text="11 August"/>
 
     </LinearLayout>
