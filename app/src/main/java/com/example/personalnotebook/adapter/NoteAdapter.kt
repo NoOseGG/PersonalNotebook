@@ -49,8 +49,10 @@ class NoteViewHolder(
 
     fun bind(item: Note) {
         binding.tvTitle.text = item.title
-        binding.imgDelete.setOnClickListener {
+        binding.tvDescription.text = item.description
+        binding.root.setOnLongClickListener {
             onClick(item, BUTTON_DELETE)
+            true
         }
         binding.root.setOnClickListener {
             onClick(item, BUTTON_ROOT)

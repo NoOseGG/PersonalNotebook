@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.personalnotebook.R
 import com.example.personalnotebook.adapter.NoteAdapter
 import com.example.personalnotebook.adapter.NoteViewHolder
@@ -49,8 +50,14 @@ class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::i
         binding.tvUser.text = mAuth.currentUser?.email
 
         loadData()
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
-        binding.recyclerView.adapter = adapter
+
+        with(binding) {
+            recyclerView.smoothScrollToPosition(0)
+            recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            recyclerView.setHasFixedSize(false)
+            recyclerView.adapter = adapter
+
+        }
 
         binding.imgAvatar.setOnClickListener {
             mAuth.signOut()
