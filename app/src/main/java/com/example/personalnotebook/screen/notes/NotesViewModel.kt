@@ -24,7 +24,8 @@ class NotesViewModel @Inject constructor(
 
     val listFlow = MutableSharedFlow<List<Note?>>(
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
-        extraBufferCapacity = 1
+        extraBufferCapacity = 1,
+        replay = 1
     )
 
     init {

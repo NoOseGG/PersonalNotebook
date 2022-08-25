@@ -14,12 +14,17 @@ class AddNoteViewModel @Inject constructor(
     private val noteRepository: NoteRepositoryImpl
 ) : ViewModel() {
 
-    private val sendNoteFlow = MutableSharedFlow<Note>(
+    private val sendAddNoteFlow = MutableSharedFlow<Note>(
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
         extraBufferCapacity = 1
     )
 
-    val resultFlow = sendNoteFlow.onEach {
+    private val sendUpdateNoteFlow = MutableSharedFlow<Note>(
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+        extraBufferCapacity = 1
+    )
+
+    val addNoteFlow = sendAddNoteFlow.onEach {
 
     }.mapLatest { note ->
         noteRepository.insertNote(note)
@@ -30,7 +35,22 @@ class AddNoteViewModel @Inject constructor(
         replay = 1
     )
 
-    fun sendAddNote(note: Note) {
-        sendNoteFlow.tryEmit(note)
+    val updateNoteFlow = sendUpdateNoteFlow.onEach {
+
+    }.mapLatest { note ->
+        noteRepository.updateNote(note)
+        note
+    }.shareIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        replay = 1
+    )
+
+    fun addNote(note: Note) {
+        sendAddNoteFlow.tryEmit(note)
+    }
+
+    fun updateNote(note: Note) {
+        sendUpdateNoteFlow.tryEmit(note)
     }
 }

@@ -6,5 +6,7 @@ interface NoteRepository {
 
     suspend fun getNotes(userName: String): Result<List<Note>>
 
+    suspend fun updateNote(note: Note)
+
     suspend fun insertNote(note: Note)
 }

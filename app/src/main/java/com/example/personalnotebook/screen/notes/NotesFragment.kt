@@ -1,37 +1,22 @@
 package com.example.personalnotebook.screen.notes
 
-import android.app.AlertDialog
 import android.app.Dialog
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.Adapter
 import android.widget.Button
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.personalnotebook.R
 import com.example.personalnotebook.adapter.NoteAdapter
 import com.example.personalnotebook.adapter.NoteViewHolder
 import com.example.personalnotebook.databinding.FragmentNotesBinding
-import com.example.personalnotebook.databinding.LayoutDeleteDialogBinding
 import com.example.personalnotebook.model.Note
 import com.example.personalnotebook.screen.BaseFragment
-import com.example.personalnotebook.screen.editnote.InfoNoteFragmentDirections
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::inflate) {
