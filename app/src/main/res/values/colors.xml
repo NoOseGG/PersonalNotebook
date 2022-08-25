@@ -12,6 +12,15 @@
     <color name="dialog_delete_color">#FFEB3B</color>
     <color name="dark_grey">#706F6E</color>
 
+    <color name="color_primary">#FAF9F6</color>
+    <color name="color_secondary">#a8ec26</color>
+    <color name="color_on_primary">#FFEB3B</color>
+
     <color name="gradient_start_color">#00BCD4</color>
     <color name="gradient_end_color">#054750</color>
+
+    <!--bottom navigation menu-->
+    <color name="bottom_nav_menu_item_enable">#595857</color>
+    <color name="bottom_nav_menu_item_disable">#BFBAB4</color>
+
 </resources>

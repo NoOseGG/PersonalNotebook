@@ -20,13 +20,10 @@ class NoteRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateNote(note: Note) {
-        println("NOTE:      $note")
         val userName = mAuth.currentUser?.email.toString().substringBefore("@")
         val myRef = database.getReference(userName)
-        println(note.id)
         myRef.child(note.id.toString()).child("title").setValue(note.title)
         myRef.child(note.id.toString()).child("description").setValue(note.description)
-
     }
 
     override suspend fun insertNote(note: Note) {

@@ -19,7 +19,7 @@
     <dimen name="item_note_content_padding_card_view">8dp</dimen>
     <dimen name="item_note_margin_horizontal_card_view">8dp</dimen>
     <dimen name="item_note_margin_vertical_card_view">4dp</dimen>
-    <dimen name="item_note_corner_radius_card_view">50dp</dimen>
+    <dimen name="item_note_corner_radius_card_view">30dp</dimen>
 
 
 </resources>

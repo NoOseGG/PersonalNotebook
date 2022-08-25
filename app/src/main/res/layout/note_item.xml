@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/item_note_margin_horizontal_card_view"
     android:layout_marginVertical="@dimen/item_note_margin_vertical_card_view"
+    android:backgroundTint="@drawable/item_note_background_selector"
     android:maxHeight="@dimen/item_note_max_height_card_view"
     android:minHeight="@dimen/item_note_min_height_card_view"
     app:cardCornerRadius="@dimen/item_note_corner_radius_card_view"
