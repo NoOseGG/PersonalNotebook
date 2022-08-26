@@ -12,9 +12,17 @@
     <color name="dialog_delete_color">#FFEB3B</color>
     <color name="dark_grey">#706F6E</color>
 
+    <!--light theme-->
     <color name="color_primary">#FAF9F6</color>
-    <color name="color_secondary">#a8ec26</color>
+    <color name="color_secondary">#FFFFFF</color>
     <color name="color_on_primary">#FFEB3B</color>
+    <color name="color_on_secondary">#000000</color>
+
+    <!--dark theme-->
+    <color name="color_primary_dark">#050505</color>
+    <color name="color_secondary_dark">#353534</color>
+    <color name="color_on_primary_dark">#3F51B5</color>
+    <color name="color_on_secondary_dark">#EDEDED</color>
 
     <color name="gradient_start_color">#00BCD4</color>
     <color name="gradient_end_color">#054750</color>
