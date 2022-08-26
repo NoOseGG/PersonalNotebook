@@ -17,9 +17,9 @@ class InfoNoteFragment : BaseFragment<FragmentInfoNoteBinding>(FragmentInfoNoteB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvUser.text = mAuth.currentUser?.email
+        binding.layoutSignIn.tvUser.text = mAuth.currentUser?.email
 
-        binding.imgAvatar.setOnClickListener {
+        binding.layoutSignIn.imgAvatar.setOnClickListener {
             mAuth.signOut()
             findNavController().navigate(R.id.action_global_loginFragment)
         }

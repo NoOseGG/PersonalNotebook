@@ -27,10 +27,10 @@ class AddNoteFragment : BaseFragment<FragmentAddNoteBinding>(FragmentAddNoteBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvUser.text = mAuth.currentUser?.email
+        binding.layoutSignIn.tvUser.text = mAuth.currentUser?.email
         checkArgumentNote(args.note)
 
-        binding.imgAvatar.setOnClickListener {
+        binding.layoutSignIn.imgAvatar.setOnClickListener {
             mAuth.signOut()
             findNavController().navigate(R.id.action_global_loginFragment)
         }

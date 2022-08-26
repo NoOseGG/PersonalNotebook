@@ -32,8 +32,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if(task.isSuccessful) {
-                                user.text = getString(R.string.fragment_login_sign_in, task.result.user?.email)
-                                imgAvatar.visibility = View.VISIBLE
                                 findNavController().navigate(R.id.action_loginFragment_to_notesFragment)
                                 println("SUCCESS")
                             } else {
@@ -58,12 +56,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun updateUI(user: FirebaseUser) {
-        binding.user.text = user.email
-        binding.imgAvatar.visibility = View.VISIBLE
+        /*binding.user.text = user.email
+        binding.imgAvatar.visibility = View.VISIBLE*/
         findNavController().navigate(R.id.action_loginFragment_to_notesFragment)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.img_avatar -> {
                 val v =  binding.imgAvatar as View
@@ -80,5 +78,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         }
         return false
-    }
+    }*/
 }

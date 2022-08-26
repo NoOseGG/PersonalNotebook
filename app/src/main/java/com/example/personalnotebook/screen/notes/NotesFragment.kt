@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -36,14 +37,16 @@ class NotesFragment : BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::i
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.layoutSignIn.imgAvatar.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.avatar_dauni))
+
         with(binding) {
-            tvUser.text = mAuth.currentUser?.email
+            layoutSignIn.tvUser.text = mAuth.currentUser?.email
             recyclerView.smoothScrollToPosition(0)
             recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             recyclerView.setHasFixedSize(false)
             recyclerView.adapter = adapter
 
-            imgAvatar.setOnClickListener {
+            layoutSignIn.imgAvatar.setOnClickListener {
                 mAuth.signOut()
                 findNavController().navigate(R.id.action_global_loginFragment)
             }
