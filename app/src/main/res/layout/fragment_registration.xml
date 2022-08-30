@@ -47,41 +47,78 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <EditText
-                android:id="@+id/ed_first_password"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/custom_input"
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:drawablePadding="12dp"
-                android:ems="10"
-                android:hint="first password"
-                android:inputType="textPassword"
-                android:paddingHorizontal="12dp"
-                android:textSize="14sp"
+            <RelativeLayout
+                android:id="@+id/layout_ed_first_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
                 app:layout_constraintTop_toBottomOf="@id/ed_login"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent">
 
-            <EditText
-                android:id="@+id/ed_second_password"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/custom_input"
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:drawablePadding="12dp"
-                android:ems="10"
-                android:hint="second password"
-                android:inputType="textPassword"
-                android:paddingHorizontal="12dp"
-                android:textSize="14sp"
-                app:layout_constraintTop_toBottomOf="@id/ed_first_password"
+                <EditText
+                    android:id="@+id/ed_first_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_input"
+                    android:drawableStart="@drawable/custom_lock_icon"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="first password"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="12dp"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/img_visible_password_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_alignRight="@id/ed_first_password"
+                    android:layout_alignBottom="@id/ed_first_password"
+                    android:layout_alignTop="@id/ed_first_password"
+                    android:src="@drawable/ic_visible_text_on_edit_text"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_ed_second_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layout_ed_first_password"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <EditText
+                    android:id="@+id/ed_second_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_input"
+                    android:drawableStart="@drawable/custom_lock_icon"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="second password"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="12dp"
+                    android:textSize="14sp"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_visible_password_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_alignRight="@id/ed_second_password"
+                    android:layout_alignBottom="@id/ed_second_password"
+                    android:layout_alignTop="@id/ed_second_password"
+                    android:src="@drawable/ic_visible_text_on_edit_text"/>
+
+            </RelativeLayout>
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_registration"
@@ -89,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 style="@style/MyButtonStyle"
-                app:layout_constraintTop_toBottomOf="@id/ed_second_password"
+                app:layout_constraintTop_toBottomOf="@id/layout_ed_second_password"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="Registration"/>

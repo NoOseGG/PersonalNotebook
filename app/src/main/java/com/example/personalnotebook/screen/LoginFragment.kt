@@ -1,13 +1,18 @@
 package com.example.personalnotebook.screen
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.*
+import android.widget.EditText
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.personalnotebook.R
 import com.example.personalnotebook.databinding.FragmentLoginBinding
+import com.example.personalnotebook.extensions.changeIconColorForVisibleText
+import com.example.personalnotebook.extensions.changeVisibleText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +25,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         super.onViewCreated(view, savedInstanceState)
 
         val currentUser = mAuth.currentUser
+        if(currentUser?.isEmailVerified != true && currentUser != null) {
+            userVerification(currentUser)
+        }
         if (currentUser != null) updateUI(currentUser)
 
         with(binding) {
@@ -44,6 +52,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             btnRegistration.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
             }
+
+            imgVisiblePassword.setOnClickListener {
+                val result = edPassword.changeVisibleText()
+
+                imgVisiblePassword.changeIconColorForVisibleText(
+                    context = requireContext(),
+                    result = result
+                )
+            }
+
         }
 
        /* binding.imgAvatar.setOnClickListener {
@@ -55,10 +73,26 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }*/
     }
 
+
+    private fun userVerification(user: FirebaseUser) {
+        user.sendEmailVerification()
+            .addOnCompleteListener { task ->
+                if(task.isSuccessful) {
+                    showToast("Verification send")
+                } else {
+                    showToast("Verification didn't send")
+                }
+            }
+    }
+
     private fun updateUI(user: FirebaseUser) {
         /*binding.user.text = user.email
         binding.imgAvatar.visibility = View.VISIBLE*/
         findNavController().navigate(R.id.action_loginFragment_to_notesFragment)
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     /*override fun onOptionsItemSelected(item: MenuItem): Boolean {

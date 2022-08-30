@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/drawable/asfasf.xml" value="0.2" />
         <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/drawable/avatar_image_rounded.xml" value="0.136" />
         <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/drawable/buttom_nav_menu.xml" value="0.2555" />
         <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/drawable/button_dialog_background.xml" value="0.2115" />
@@ -20,6 +21,8 @@
         <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/drawable/ic_lock_focused.xml" value="0.2295" />
         <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/drawable/ic_note.xml" value="0.2555" />
         <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/drawable/ic_settings.xml" value="0.2555" />
+        <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/drawable/ic_visible_text_on_edit_text.xml" value="0.2555" />
+        <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/drawable/ic_visible_text_on_edit_text_focused.xml" value="0.2555" />
         <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/drawable/img_avatar.xml" value="0.123" />
         <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/drawable/item_note_background_selector.xml" value="0.2555" />
         <entry key="..\:/MyProject/PersonalNotebook/app/src/main/res/layout/activity_main.xml" value="0.20344218887908208" />

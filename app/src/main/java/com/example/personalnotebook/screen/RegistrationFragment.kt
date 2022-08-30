@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.personalnotebook.R
 import com.example.personalnotebook.databinding.FragmentRegistrationBinding
+import com.example.personalnotebook.extensions.changeIconColorForVisibleText
+import com.example.personalnotebook.extensions.changeVisibleText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,19 +40,25 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentR
             btnBack.setOnClickListener {
                 findNavController().popBackStack()
             }
+
+            imgVisiblePasswordFirst.setOnClickListener {
+                changeIconColorForVisibleText(imgVisiblePasswordFirst, edFirstPassword)
+            }
+            imgVisiblePasswordSecond.setOnClickListener {
+                changeIconColorForVisibleText(imgVisiblePasswordSecond, edSecondPassword)
+            }
         }
     }
 
     private fun createNewUserInFirebase(login: String, password: String) {
-
         mAuth.createUserWithEmailAndPassword(login, password)
             .addOnCompleteListener { task ->
                 if(task.isSuccessful) {
+
                     showToast(getString(R.string.registred))
                     findNavController().popBackStack()
                 } else {
                     showToast(getString(R.string.not_registred))
-
                 }
             }
     }
@@ -66,6 +77,15 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(FragmentR
             return false
         }
         return true
+    }
+
+    private fun changeIconColorForVisibleText(image: ImageView, editText: EditText) {
+        val result = editText.changeVisibleText()
+
+        image.changeIconColorForVisibleText(
+            context = requireContext(),
+            result = result
+        )
     }
 
     private fun showToast(message: String) {
