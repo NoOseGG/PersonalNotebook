@@ -1,8 +1,10 @@
 package com.example.personalnotebook.screen
 
+import android.app.Dialog
 import android.os.Bundle
 import android.text.InputType
 import android.view.*
+import android.widget.Button
 import android.widget.EditText
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -13,6 +15,7 @@ import com.example.personalnotebook.R
 import com.example.personalnotebook.databinding.FragmentLoginBinding
 import com.example.personalnotebook.extensions.changeIconColorForVisibleText
 import com.example.personalnotebook.extensions.changeVisibleText
+import com.example.personalnotebook.model.Note
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,11 +27,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val currentUser = mAuth.currentUser
-        if(currentUser?.isEmailVerified != true && currentUser != null) {
-            userVerification(currentUser)
-        }
-        if (currentUser != null) updateUI(currentUser)
+        var currentUser = mAuth.currentUser
+        if (currentUser != null && currentUser.isEmailVerified) updateUI()
 
         with(binding) {
 
@@ -37,16 +37,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 val password = edPassword.text.toString()
 
                 if(email.isNotEmpty() && password.isNotEmpty()) {
-                    mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener { task ->
-                            if(task.isSuccessful) {
-                                findNavController().navigate(R.id.action_loginFragment_to_notesFragment)
-                                println("SUCCESS")
-                            } else {
-                                println("FAILURE")
-                            }
-                        }
+                    signIn(email, password)
+                    currentUser = mAuth.currentUser
                 }
+
+                if(currentUser?.isEmailVerified == false) {
+                    showVerificationDialog()
+                    return@setOnClickListener
+                }
+
+                updateUI()
             }
 
             btnRegistration.setOnClickListener {
@@ -63,54 +63,41 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
 
         }
-
-       /* binding.imgAvatar.setOnClickListener {
-            println(mAuth.currentUser?.email)
-            mAuth.signOut()
-            binding.imgAvatar.visibility = View.INVISIBLE
-            println(mAuth.currentUser?.email)
-            binding.user.text = ""
-        }*/
     }
 
+    private fun updateUI() {
+        findNavController().navigate(R.id.action_loginFragment_to_notesFragment)
+    }
 
-    private fun userVerification(user: FirebaseUser) {
-        user.sendEmailVerification()
+    private fun signIn(email: String, password: String) {
+        mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if(task.isSuccessful) {
-                    showToast("Verification send")
+                    println("SUCCESS")
                 } else {
-                    showToast("Verification didn't send")
+                    println("FAILURE")
                 }
             }
-    }
-
-    private fun updateUI(user: FirebaseUser) {
-        /*binding.user.text = user.email
-        binding.imgAvatar.visibility = View.VISIBLE*/
-        findNavController().navigate(R.id.action_loginFragment_to_notesFragment)
     }
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.img_avatar -> {
-                val v =  binding.imgAvatar as View
-                val pm = PopupMenu(requireContext(), v)
+    private fun showVerificationDialog() {
+        val dialog = Dialog(requireContext(), R.style.AlertDialogTheme)
+        dialog.setContentView(R.layout.layout_delete_verification)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
 
-                pm.menuInflater.inflate(R.menu.user_menu, pm.menu)
-                pm.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
-                    when(item.itemId) {
-                        R.id.info_user -> Toast.makeText(requireContext(), "Info User", Toast.LENGTH_SHORT).show()
-                    }
-                    true
-                })
-                pm.show()
-            }
+        dialog.findViewById<Button>(R.id.btn_no).setOnClickListener {
+            dialog.dismiss()
         }
-        return false
-    }*/
+
+        dialog.findViewById<Button>(R.id.btn_yes).setOnClickListener {
+            mAuth.currentUser?.sendEmailVerification()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
 }
